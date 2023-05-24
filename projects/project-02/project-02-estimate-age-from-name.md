@@ -254,20 +254,20 @@ tbl_lifetables_extended_2022 <- tbl_lifetables_extended |>
 
 tbl_lifetables_extended_2022 |> 
   # Initialize a ggplot of year vs. probability of being alive (lx/10^5)
-  ggplot(aes(x= year, y =- lx))+
+  ggplot(aes(x= year, y = lx/10^5))+
   # Add a line layer
-  geom_line()+
+  geom_line(color = 'limegreen')+
   # Add a step layer for the non-imputed data
   geom_step(
     data = function(d) filter(d, !is_imputed),
-    linetype = 'dashed'
+    linetype = 'dashed', color = 'deepskyblue1'
   ) +
   # Add labels (title, subtitle, x, y, caption)
   labs(
-    title = "Survival curve for a person to be alive in 2022",
+    title = "Probability of survival over the years",
     
     x = "Year",
-    y = "Probability of being alive ",
+    y = "Probability ",
     caption = "Source:https://www.ssa.gov/oact/NOTES/as120/LifeTables_Tbl_6_1990.html"
   ) +
   
@@ -377,7 +377,7 @@ plot_estimated_age <- function(tbl, my_name, my_sex) {
     # Initialize a ggplot with x = year
     ggplot(aes(x= year))+
     # Add a column layer with y = nb_alive, and appropriate colors
-    geom_col(aes(y = nb_alive), color = 'blue')+
+    geom_col(aes(y = nb_alive), color = 'deepskyblue1')+
     # Add a line layer with y = nb_births, and appropriate colors
     geom_line(aes(y = nb_births), color = 'red')+
     # Add a vertical line for the median age
@@ -521,7 +521,7 @@ tbl_names_extended_age |>
   geom_point(size = 2, color = "red") +
   # Add labels (title, subtitle, x, y)
   labs(
-    title = "Meadian Ages for Females with the  25 most common names",
+    title = "Median Ages for Females with the  25 most common names",
      x = "Age ",
     y = "Name"
    
